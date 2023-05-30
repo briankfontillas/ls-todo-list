@@ -109,4 +109,55 @@ class TodoList {
 
     return newList;
   }
+
+  findByTitle(title) {
+    return this.filter(todo => todo.getTitle() === title).first();
+  }
+
+  allDone() {
+    return this.filter(todo => todo.isDone());
+  }
+
+  allNotDone() {
+    return this.filter(todo => !todo.isDone());
+  }
+
+  markDone(title) {
+    let firstNotDone = this.allNotDone()
+      .filter(todo => todo.getTitle() === title)
+      .first();
+
+    if (firstNotDone) firstNotDone.markDone();
+  }
+
+  markAllDone() {
+    this.forEach(todo => {
+      if (!todo.isDone()) todo.markDone();
+    });
+  }
+
+  markAllUndone() {
+    this.forEach(todo => {
+      if (todo.isDone()) todo.markUndone();
+    });
+  }
+
+  toArray() {
+    return this.todos.slice();
+  }
 }
+
+
+let list = new TodoList('my list');
+list.add(new Todo('Go to work'));
+list.add(new Todo('Brush Teeth'));
+
+console.log(list);
+
+list.markAllDone();
+
+console.log(list);
+
+list.markAllUndone();
+
+console.log(list);
