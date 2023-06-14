@@ -1,33 +1,4 @@
-class Todo {
-  static DONE_MARKER = "X";
-  static UNDONE_MARKER = " ";
-
-  constructor(title) {
-    this.title = title;
-    this.done = false;
-  }
-
-  toString() {
-    let marker = this.isDone() ? Todo.DONE_MARKER : Todo.UNDONE_MARKER;
-    return `[${marker}] ${this.title}`;
-  }
-
-  markDone() {
-    this.done = true;
-  }
-
-  markUndone() {
-    this.done = false;
-  }
-
-  isDone() {
-    return this.done;
-  }
-
-  getTitle() {
-    return this.title;
-  }
-}
+const Todo = require('./todo');
 
 class TodoList {
   constructor(title) {
@@ -79,11 +50,11 @@ class TodoList {
   }
 
   shift() {
-    this.todos.shift();
+    return this.todos.shift();
   }
 
   pop() {
-    this.todos.pop();
+    return this.todos.pop();
   }
 
   removeAt(index) {
@@ -147,17 +118,4 @@ class TodoList {
   }
 }
 
-
-let list = new TodoList('my list');
-list.add(new Todo('Go to work'));
-list.add(new Todo('Brush Teeth'));
-
-console.log(list);
-
-list.markAllDone();
-
-console.log(list);
-
-list.markAllUndone();
-
-console.log(list);
+module.exports = TodoList;
